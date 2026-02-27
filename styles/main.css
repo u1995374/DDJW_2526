@@ -1,13 +1,13 @@
-body {
+body{
 	background-color: lightgreen;
 }
 
-button {
+button{
   background-color: blue;
   color: white;
 }
 
-button:hover {
+button:hover{
   background-color: red;
 }
 
@@ -24,6 +24,7 @@ button.center{
 }
 
 #title{
-	color:red;
+	color:blue;
 	text-align: center;
 }
+

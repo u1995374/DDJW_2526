@@ -1,9 +1,10 @@
 addEventListener('load', function() {
     document.getElementById('play').addEventListener('click', 
-    function(){
-        alert("Comença la partida");
-    });
-
+	function(){
+		let alias = prompt("Introdueix el teu àlies:");
+		console.log("Alias jugador: " + alias);
+	});
+	
     document.getElementById('options').addEventListener('click', 
     function(){
         console.error("Opció no implementada");
@@ -19,3 +20,4 @@ addEventListener('load', function() {
         console.warn("No es pot sortir!");
     });
 });
+
