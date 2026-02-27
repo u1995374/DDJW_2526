@@ -1,3 +1,16 @@
+body {
+	background-color: lightgreen;
+}
+
+button {
+  background-color: blue;
+  color: white;
+}
+
+button:hover {
+  background-color: red;
+}
+
 #title, .center{
 	display: block;
 	margin-left: auto;
