@@ -67,14 +67,13 @@ var game = {
         }
     },
     save: function(){
-        let toSave = {
+        let toSave = JSON.stringify({
             items: this.items,
             states: this.states,
-            lastCard: null,
-            score: 200,
-            pairs: 2
-        };
-        // TODO: On ho guardem?
+            lastCard: this.lastCard,
+            score: this.score,
+            pairs: this.pairs
+        });
     }
 }
 
