@@ -11,13 +11,14 @@ const StateCard = Object.freeze({
 });
 
 var game = {
+    groupSize : 2,
+    selectCards: [],
     items: [],
     states: [],
     setValue: null,
     ready: 0,
-    lastCard: null,
-    score: 200,
-    pairs: 2,
+    score: 50,
+    groupsLeft: 2,
     goBack: function(idx){
         this.setValue && this.setValue[idx](back);
         this.states[idx] = StateCard.ENABLE;
@@ -31,17 +32,22 @@ var game = {
             let toLoad = JSON.parse(sessionStorage.load);
             this.items = toLoad.items;
             this.states = toLoad.states;
-            this.lastCard = toLoad.lastCard;
+            this.selectCards = toLoad.selectCards;
             this.score = toLoad.score;
-            this.pairs = toLoad.pairs;
+            this.groupsLeft = toLoad.groupsLeft;
+            this.groupSize = toLoad.groupSize;
         }
         else{ // Nova partida
-            this.items = resources.slice();          
+            this.items = resources.slice(0, this.groupsLeft);          
             shuffe(this.items);                      
-            this.items = this.items.slice(0, this.pairs); 
-            this.items = this.items.concat(this.items);        
+                     
+            let temp = [];
+            for (let i = 0; i < this.groupSize; i++) {
+                temp = temp.concat(this.items);
+            }
+            this.items = temp;     
             shuffe(this.items);
-            this.states = new Array(this.items.length);
+            this.states = new Array(this.items.length).fill(StateCard.ENABLE);
         }
     },
     start: function(){
@@ -61,35 +67,47 @@ var game = {
     click: function(indx){
         if (this.states[indx] !== StateCard.ENABLE || this.ready < this.items.length) return;
         this.goFront(indx);
-        if (this.lastCard === null) this.lastCard = indx; // Primera carta clicada
+        if (this.selectCards.length === 0) this.selectCards.push(indx); // Primera carta clicada
         else{ // Teníem carta prèvia
-            if (this.items[this.lastCard] === this.items[indx]){
-                this.pairs--;
-                this.states[this.lastCard] = this.states[indx] = StateCard.DONE;
-                if (this.pairs <= 0){
-                    alert(`Has guanyat amb ${this.score} punts!!!!`);
-                    window.location.assign("../");
+            if (this.items[this.selectCards[0]] === this.items[indx]){ // carta correcta
+                this.selectCards.push(indx);
+                if (this.selectCards.length === this.groupSize) {
+                    this.selectCards.forEach(i => {
+                        this.states[i] = StateCard.DONE;
+                    });
+                    this.groupsLeft--;
+                    this.score += 25;
+                    this.selectCards = [];
+                    if (this.groupsLeft <= 0){
+                        alert(`Has guanyat amb ${this.score} punts!!!!`);
+                        window.location.assign("../");
+                    }
                 }
             }
-            else {
-                this.goBack(indx);
-                this.goBack(this.lastCard);
+            else { // carta incorrecta
+                this.selectCards.push(indx);
                 this.score -= 25;
+                setTimeout(()=>{
+                    this.selectCards.forEach(i => {
+                        this.goBack(i);
+                    });
+                    this.selectCards = [];
+                }, 1000);
                 if (this.score <= 0){
                     alert ("Has perdut");
                     window.location.assign("../");
                 }
             }
-            this.lastCard = null;
         }
     },
     save: function(){
         let to_save = JSON.stringify({
             items: this.items,
             states: this.states,
-            lastCard: this.lastCard,
+            selectCards: this.selectCards,
             score: this.score,
-            pairs: this.pairs
+            groupsLeft: this.groupsLeft,
+            groupSize: this.groupSize,
         });
         let ret = false;
         fetch('../php/save.php', {
