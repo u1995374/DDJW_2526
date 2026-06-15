@@ -21,15 +21,22 @@ if (canvas){
 function start(){
     selectCards();
     cards = gameItems.map((c)=>{return {texture:c}});
-    loadCardResource("../resources/back.png");
+    loadCardResource("../resources/back.svg");
+
+    const cardsPerRow = 6;
     cards.forEach((card, indx) => {
         loadCardResource(card.texture);
         initCard(val => card.texture = val);
-        card.position = {
-            xMin: 2+100*indx,
-            xMax: 2+100*indx + c_w,
-            yMin: 0,
-            yMax: c_h
+
+        // Calcul de files i columnes dinàmic
+        let row = Math.floor(indx / cardsPerRow);
+        let col = indx % cardsPerRow;
+
+        ccard.position = {
+            xMin: 15 + 110 * col,
+            xMax: 15 + 110 * col + c_w,
+            yMin: 15 + 140 * row,
+            yMax: 15 + 140 * row + c_h
         }
         card.onClick = function(x, y){
             return x >= this.position.xMin && x <= this.position.xMax &&

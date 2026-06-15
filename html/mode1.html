@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="module" src="../js/mode1.js"></script>
+    <link rel="stylesheet" 
+        href="../styles/main.css">
+    <title>Configuració de la Partida</title>
+</head>
+<body>
+
+    <h1 id="title">Configura la teva partida</h1>
+
+    <div class="form-wrapper">
+        
+        <div class="form-group">
+            <label for="cards">Número de cartes a la partida:</label>
+            <select id="cards">
+                <option value="6">6 cartes</option>
+                <option value="12">12 cartes</option>
+                <option value="18">18 cartes</option>
+                <option value="24">24 cartes</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="difficulty">Dificultat del joc:</label>
+            <select id="difficulty">
+                <option value="easy">Fàcil</option>
+                <option value="normal" selected>Normal</option>
+                <option value="hard">Difícil</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="groupSize">Mida del grup (parelles, trios...):</label>
+            <select id="groupSize">
+                <option value="2" selected>Parella (2)</option>
+                <option value="3">Trio (3)</option>
+                <option value="4">Quartet (4)</option>
+            </select>
+        </div>
+
+        <button id="play">Començar a Jugar</button>
+
+    </div>
+
+    <script type="module" src="../js/mode1.js"></script>
+</body>
+</html>

@@ -1,44 +1,141 @@
-body{
-	background-color: lightgreen;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+body {
+    background-color: #f8f9fa; 
+    color: #2d3748; 
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
-button{
-  background-color: blue;
-  color: white;
+#title {
+    color: #1a202c;
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
 }
 
-button:hover{
-  background-color: red;
-}
-
-#title, .center{
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-button.center{
-	width: 6rem;
-	height: 3rem;
-	margin-top: 1rem;
-}
-
-#title{
-	color:blue;
-	text-align: center;
-}
-
-#game{
+h1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
+    margin: 0;
+}
+
+button {
+    background-color: #ffffff;
+    color: #4a5568;
+    border: 1px solid #e2e8f0;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    transition: all 0.2s ease-in-out; 
+}
+
+button:hover {
+    background-color: #f7fafc;
+    color: #1a202c;
+    border-color: #cbd5e0;
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button.center {
+    min-width: 9rem;
+    height: auto;
     margin-top: 1.25rem;
 }
 
-h1{
-	display: flex;
+#game {
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 1.25rem; /* Una mica més d'espai entre cartes perquè "respirin" */
+    margin-top: 2rem;
+    padding: 2rem;
+    background-color: #ffffff; 
+    border-radius: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.03), 0 4px 6px -2px rgba(0, 0, 0, 0.01);
+    max-width: 850px;
 }
 
+img[title="card"] {
+    width: 96px;
+    height: 128px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08); 
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+}
+
+img[title="card"]:hover {
+    transform: scale(1.06) translateY(-4px); 
+    box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.15);
+}
+
+.modes-wrapper, .form-wrapper {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem; 
+    margin-top: 1rem;
+}
+
+.modes-wrapper {
+    flex-direction: row;
+    max-width: 500px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #444444;
+}
+
+.form-group select {
+    width: 100%;
+}
+
+.form-wrapper button {
+    background-color: #222222;
+    color: #ffffff;
+    border: none;
+    font-weight: bold;
+    padding: 0.8rem;
+}
+
+.form-wrapper button:hover {
+    background-color: #444444;
+}
